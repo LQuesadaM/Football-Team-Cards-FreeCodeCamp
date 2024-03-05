@@ -192,8 +192,31 @@ const setPlayerCards = (arr = players) => {
       <p>Number: ${number}</p>
       <p>Nickname: ${nickname} ${nickname !== null ? nickname : "N/A"}</p>
     </div>`
-  }).join("")
+  }).join("");
 };
 
+// Detect when a user makes a selection from Filter Teammates
+playersDropdownList.addEventListener("change", (e) => {
+  playerCards.innerHTML = "";
+  switch (e.target.value) {
+    case "nickname":
+      setPlayerCards(players.filter((player) => player.nickname !== null));
+      break;
+    case "forward":
+      setPlayerCards(players.filter((player) => player.position === "forward"));
+      break;
+    case "midfielder":
+      setPlayerCards(players.filter((player) => player.position === "midfielder"));
+      break;
+    case "defender":
+      setPlayerCards(players.filter((player) => player.position === "defender"));
+      break;
+    case "goalkeeper":
+      setPlayerCards(players.filter((player) => player.position === "goalkeeper"));
+      break;
+    default:
+      setPlayerCards();
+      break;
+  }
 
-//playersDropdownList.addEventListener("click", setPlayerCards);
+});
